@@ -1,6 +1,9 @@
 <?php
 namespace MaDnh\LaravelModelLabels;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+
 trait LabelsTrait
 {
     /*
@@ -60,18 +63,18 @@ trait LabelsTrait
      */
     protected static function getAutoConvertLabel($field)
     {
-        return title_case(str_replace('_', ' ', strtolower($field)));
+        return Str::title(str_replace('_', ' ', strtolower($field)));
     }
 
     public static function labels()
     {
-        $fields = func_num_args() ? array_flatten(func_get_args()) : true;
+        $fields = func_num_args() ? Arr::flatten(func_get_args()) : true;
         $use_local = property_exists(static::class, 'labels') && is_array(static::$labels) && !empty(static::$labels);
 
         $result = static::$label_cached;
 
         if (is_array($fields) && !count(array_diff($fields, array_keys($result)))) {
-            return array_only($result, $fields);
+            return Arr::only($result, $fields);
         }
 
         /**
@@ -110,7 +113,7 @@ trait LabelsTrait
         static::$label_cached = $result;
 
         if (is_array($fields)) {
-            return array_only($result, $fields);
+            return Arr::only($result, $fields);
         }
 
         return $result;
@@ -142,6 +145,6 @@ trait LabelsTrait
             return $label;
         }
 
-        return title_case($class_basename);
+        return Str::title($class_basename);
     }
 }

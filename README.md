@@ -6,7 +6,7 @@ Support get label of model's fields, from model::$labels property or Laravel's l
 1. Add this package to `composer.json`
 
 ```shell
-composer require madnh/laravel-model-labels
+composer require evsyutkin/laravel-model-labels
 ```
 
 2. In model classes, use `MaDnh\LaravelModelLabels\LabelsTrait`
