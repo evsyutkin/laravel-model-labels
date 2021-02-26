@@ -125,7 +125,7 @@ trait LabelsTrait
             $path = static::$label_path;
         }
         if (empty($path)) {
-            $path = 'model_' . snake_case(class_basename(static::class));
+            $path = 'model_' . Str::snake(class_basename(static::class));
         }
 
         if ($sub_path) {
